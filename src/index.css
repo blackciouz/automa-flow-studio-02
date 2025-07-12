@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Automaciouz Design System - Dark theme with glassmorphism */
+
+@layer base {
+  :root {
+    /* Dark theme - Automaciouz palette */
+    --background: 225 6% 13%; /* #1e1e23 */
+    --foreground: 210 40% 98%;
+
+    --card: 225 6% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 6% 16%; /* #272731 */
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 272 100% 25%; /* #4B0082 - Indigo profond */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 221 14% 21%; /* #303140 */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 13% 18%; /* #252530 */
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 186 100% 50%; /* #00FFFF - Cyan vibrant */
+    --accent-foreground: 225 6% 13%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 25%; /* #383844 */
+    --input: 220 13% 18%; /* #252530 */
+    --ring: 186 100% 50%; /* #00FFFF */
+
+    --radius: 0.75rem;
+
+    /* Node category colors */
+    --trigger: 158 64% 52%; /* #10B981 - Vert émeraude */
+    --media: 187 85% 44%; /* #06B6D4 - Bleu cyan */
+    --action: 255 91% 67%; /* #8B5CF6 - Violet indigo */
+    --data: 43 96% 56%; /* #F59E0B - Orange ambre */
+
+    /* Glassmorphism */
+    --glass-bg: 225 6% 13% 0.8;
+    --glass-border: 210 40% 98% 0.1;
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+    /* Flow specific */
+    --flow-bg: 225 6% 10%; /* #18181c */
+    --flow-grid: 210 40% 98% 0.05;
+    --flow-node-bg: 225 6% 16% 0.9;
+    --flow-node-border: 210 40% 98% 0.1;
+    --flow-edge: 210 40% 98% 0.3;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', sans-serif;
+    overflow: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utility classes */
+  .glass {
+    background: hsla(var(--glass-bg));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsla(var(--glass-border));
+    box-shadow: var(--glass-shadow);
+    transition: var(--transition-smooth);
+  }
+
+  .glass-strong {
+    background: hsla(225 6% 13% / 0.95);
+    backdrop-filter: blur(24px);
+    border: 1px solid hsla(210 40% 98% / 0.15);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.37),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    transition: var(--transition-smooth);
+  }
+
+  .glass-strong:hover {
+    background: hsla(225 6% 13% / 0.98);
+    border-color: hsla(210 40% 98% / 0.2);
+    box-shadow: 
+      0 12px 40px 0 rgba(31, 38, 135, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  /* Enhanced animations */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Flow node styles */
+  .flow-node {
+    background: hsla(var(--flow-node-bg));
+    border: 1px solid hsla(var(--flow-node-border));
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+  }
+
+  .flow-node:hover {
+    border-color: hsla(var(--accent) / 0.5);
+    box-shadow: 0 0 20px hsla(var(--accent) / 0.3);
+  }
+
+  .flow-node.selected {
+    border-color: hsl(var(--accent));
+    box-shadow: 0 0 20px hsla(var(--accent) / 0.5);
+  }
+
+  /* Node category colors */
+  .node-trigger {
+    border-color: hsla(var(--trigger) / 0.6);
+  }
+  .node-trigger:hover {
+    border-color: hsl(var(--trigger));
+    box-shadow: 0 0 20px hsla(var(--trigger) / 0.4);
+  }
+
+  .node-media {
+    border-color: hsla(var(--media) / 0.6);
+  }
+  .node-media:hover {
+    border-color: hsl(var(--media));
+    box-shadow: 0 0 20px hsla(var(--media) / 0.4);
+  }
+
+  .node-action {
+    border-color: hsla(var(--action) / 0.6);
+  }
+  .node-action:hover {
+    border-color: hsl(var(--action));
+    box-shadow: 0 0 20px hsla(var(--action) / 0.4);
+  }
+
+  .node-data {
+    border-color: hsla(var(--data) / 0.6);
+  }
+  .node-data:hover {
+    border-color: hsl(var(--data));
+    box-shadow: 0 0 20px hsla(var(--data) / 0.4);
+  }
+
+  /* Context menu styles */
+  .context-menu {
+    background: hsla(var(--popover) / 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(var(--border) / 0.5);
+    box-shadow: 0 10px 40px hsla(0 0% 0% / 0.5);
+  }
+
+  /* Flow grid dots */
+  .react-flow__background {
+    background-color: hsl(var(--flow-bg));
+  }
+
+  .react-flow__controls {
+    background: hsla(var(--popover) / 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsla(var(--border) / 0.3);
+    border-radius: var(--radius);
+  }
+
+  .react-flow__controls button {
+    background: transparent;
+    border: none;
+    color: hsl(var(--foreground));
+  }
+
+  .react-flow__controls button:hover {
+    background: hsla(var(--accent) / 0.1);
+    color: hsl(var(--accent));
+  }
+
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsla(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsla(var(--muted-foreground) / 0.5);
+  }
+}
